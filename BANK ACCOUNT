@@ -1,0 +1,34 @@
+class BankAccount:
+    def __init__(self, account_number, account_holder, initial_balance=0.0):
+        self.account_number = account_number  
+        self._account_holder = account_holder  
+        self.__balance = initial_balance  
+
+    def deposit(self, amount):
+        if amount > 0:
+            self.__balance += amount
+            print(f"Deposited: ₱{amount:.2f}. New balance: ₱{self.__balance:.2f}")
+        else:
+            print("Deposit amount must be positive.")
+
+    def withdraw(self, amount):
+        if 0 < amount <= self.__balance:
+            self.__balance -= amount
+            print(f"Withdrew: ₱{amount:.2f}. New balance: ₱{self.__balance:.2f}")
+        else:
+            print("Insufficient funds or invalid withdrawal amount.")
+
+    def get_balance(self):
+        return self.__balance
+
+    def get_account_holder(self):
+        return self._account_holder
+
+
+if __name__ == "__main__":
+    account = BankAccount("123456789", "Juswa", 1000.0)
+    print(f"Account Number: {account.account_number}")
+    print(f"Account Holder: {account.get_account_holder()}")
+    account.deposit(500)
+    account.withdraw(200)
+    print(f"Final Balance: ₱{account.get_balance():.2f}")
