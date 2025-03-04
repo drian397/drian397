@@ -1,0 +1,49 @@
+class BankAccount:
+    def __init__(self, account_number, account_holder, initial_balance=0.0):
+        self.account_number = account_number  # Public attribute
+        self._account_holder = account_holder  # Protected attribute
+        self.__balance = initial_balance  # Private attribute
+
+    def deposit(self, amount):
+        """Deposit money into the account."""
+        if amount > 0:
+            self.__balance += amount
+            print(f"Deposited: ${amount:.2f}. New balance: ${self.__balance:.2f}")
+        else:
+            print("Deposit amount must be positive.")
+
+    def withdraw(self, amount):
+        """Withdraw money from the account."""
+        if 0 < amount <= self.__balance:
+            self.__balance -= amount
+            print(f"Withdrew: ${amount:.2f}. New balance: ${self.__balance:.2f}")
+        else:
+            print("Insufficient funds or invalid withdrawal amount.")
+
+    def get_balance(self):
+        """Get the current balance of the account."""
+        return self.__balance
+
+    def get_account_holder(self):
+        """Get the account holder's name."""
+        return self._account_holder
+
+# Example usage
+if __name__ == "__main__":
+    # Create a new bank account
+    account = BankAccount("123456789", "Juswa", 1000.0)
+    
+    # Accessing public attribute
+    print(f"Account Number: {account.account_number}")
+    
+    # Accessing protected attribute via method
+    print(f"Account Holder: {account.get_account_holder()}")
+    
+    # Deposit money
+    account.deposit(500)
+    
+    # Withdraw money
+    account.withdraw(200)
+    
+    # Accessing private attribute via method
+    print(f"Final Balance: ${account.get_balance():.2f}")
