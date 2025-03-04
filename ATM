@@ -1,0 +1,37 @@
+class ATM:
+    def __init__(self, balance=0):
+        self.public_balance = balance
+        self._protected_balance = balance
+        self.__private_balance = balance
+
+    def deposit(self, amount):
+        if amount > 0:
+            self.public_balance += amount
+            self._protected_balance += amount
+            self.__private_balance += amount
+            print(f"Deposited {amount}. New balance is {self.public_balance}.")
+        else:
+            print("Invalid deposit amount.")
+
+    def withdraw(self, amount):
+        if amount > 0 and amount <= self.__private_balance:
+            self.public_balance -= amount
+            self._protected_balance -= amount
+            self.__private_balance -= amount
+            print(f"Withdrew {amount}. New balance is {self.public_balance}.")  
+        else:
+            print("Invalid withdrawal amount or insufficient funds.")
+
+    def check_balance(self):
+        print(f"Public balance: {self.public_balance}")
+        print(f"Protected balance: {self._protected_balance}")
+        print(f"Private balance: {self.__private_balance}")
+
+
+atm = ATM(1000)
+atm.deposit(500)
+atm.withdraw(200)
+atm.check_balance()
+print(atm.public_balance)
+print(atm._protected_balance)
+print(atm._ATM__private_balance)
